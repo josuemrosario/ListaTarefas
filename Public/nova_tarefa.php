@@ -19,13 +19,19 @@
 			</div>
 		</nav>
 
+		<?PHP if(isset($_GET['inclusao']) && $_GET['inclusao'] == 1) { ?>
+			<div class="bg-success pt-2 text-white d-flex justify-content-center">
+				<h5>Tarefa Inserida com sucesso</h5>
+			</div>
+		<?PHP } ?>	
+
 		<div class="container app">
 			<div class="row">
 				<div class="col-md-3 menu">
 					<ul class="list-group">
 						<li class="list-group-item"><a href="index.php">Tarefas pendentes</a></li>
 						<li class="list-group-item active"><a href="#">Nova tarefa</a></li>
-						<li class="list-group-item"><a href="todas_tarefas.php">Todas tarefas</a></li>
+						<li class="list-group-item"><a href="todas_tarefas.php?acao=recuperar">Todas tarefas</a></li>
 					</ul>
 				</div>
 
@@ -36,7 +42,7 @@
 								<h4>Nova tarefa</h4>
 								<hr />
 
-								<form method="post" action="tarefa_controller.php">
+								<form method="post" action="tarefa_controller.php?acao=inserir">
 									<div class="form-group">
 										<label>Descrição da tarefa:</label>
 										<input type="text" class="form-control" name="tarefa" placeholder="Exemplo: Lavar o carro">

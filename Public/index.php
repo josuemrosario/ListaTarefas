@@ -25,7 +25,7 @@
 					<ul class="list-group">
 						<li class="list-group-item active"><a href="#">Tarefas pendentes</a></li>
 						<li class="list-group-item"><a href="nova_tarefa.php">Nova tarefa</a></li>
-						<li class="list-group-item"><a href="todas_tarefas.php">Todas tarefas</a></li>
+						<li class="list-group-item"><a href="todas_tarefas.php?acao=recuperar">Todas tarefas</a></li>
 					</ul>
 				</div>
 
