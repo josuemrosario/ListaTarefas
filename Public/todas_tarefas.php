@@ -2,7 +2,7 @@
 	//$acao = 'recuperar';
 	require 'tarefa_controller.php';
 
-	
+
 	// Apenas para fins de Debug
 	if(defined('DEBUG') && DEBUG == 1){
 		echo '<pre>';
@@ -26,14 +26,9 @@
 			function editar(id, txt_tarefa){
 
 				
-				alert('tarefa_'+id)
-				//let document.getElementById('tarefa_' + id)
-				//document.getElementById('tarefa_' + id).innerHTML = ''
-
-
 				//cria o form
 				let form = document.createElement('Form')
-				form.action = '#'
+				form.action = 'tarefa_controller.php?acao=atualizar'
 				form.method = 'post'
 				form.className = 'row'
 
@@ -65,8 +60,6 @@
 				let tarefa = document.getElementById('tarefa_' + id)
 				tarefa.innerHTML = '' //limpa o html do elemento
 				tarefa.insertBefore(form,tarefa[0]) // insere o form criado antes do elemento
-
-				alert(txt_tarefa)
 
 
 			}
