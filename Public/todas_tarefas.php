@@ -21,6 +21,59 @@
 		<link rel="stylesheet" href="css/estilo.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+		<script>
+			function editar(id, txt_tarefa){
+
+				
+				alert('tarefa_'+id)
+				//let document.getElementById('tarefa_' + id)
+				//document.getElementById('tarefa_' + id).innerHTML = ''
+
+
+				//cria o form
+				let form = document.createElement('Form')
+				form.action = '#'
+				form.method = 'post'
+				form.className = 'row'
+
+				//criar um input
+				let inputTarefa = document.createElement('input')
+				inputTarefa.type = 'text'
+				inputTarefa.name = 'tarefa'
+				inputTarefa.className = 'col-9 form-control'
+				inputTarefa.value  = txt_tarefa
+
+				//input hidden com o id que sera atualizado
+				let inputId = document.createElement('input')
+				inputId.type = 'hidden'
+				inputId.name = 'id'
+				inputId.value = id
+
+				//Cria um botão
+				let button = document.createElement('button')
+				button.type = 'submit'
+				button.className = 'col-3 btn btn-info'
+				button.innerHTML = 'Atualizar'
+
+				//cria arvore de elementos
+				form.appendChild(inputTarefa)
+				form.appendChild(inputId)
+				form.appendChild(button)
+
+				//Insere a arvore no elemento	               
+				let tarefa = document.getElementById('tarefa_' + id)
+				tarefa.innerHTML = '' //limpa o html do elemento
+				tarefa.insertBefore(form,tarefa[0]) // insere o form criado antes do elemento
+
+				alert(txt_tarefa)
+
+
+			}
+
+		</script>
+
+
 	</head>
 
 	<body>
@@ -58,7 +111,7 @@
 										</div>
 										<div class="col-sm-3 mt-2 d-flex justify-content-between">
 											<i class="fas fa-trash-alt fa-lg text-danger"></i>
-											<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $tarefa->id ?>)"></i>
+											<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $tarefa->id ?>, '<?= $tarefa->tarefa ?>')"></i>
 											<i class="fas fa-check-square fa-lg text-success"></i>
 										</div>
 									</div>
@@ -73,42 +126,6 @@
 			</div>
 		</div>
 		
-		<script>
-			function editar(id, txt_tarefa){
 
-				
-				//cria o form
-				let form = document.createElement('Form')
-				form.action = '#'
-				form.method = 'post'
-				form.className = 'row'
-
-				//criar um input
-				let inputTarefa = document.createElement('input')
-				inputTarefa.type = 'text'
-				inputTarefa.name = 'tarefa'
-				inputTarefa.className = 'col-9 form-control'
-
-				//Cria um botão
-				let button = document.createElement('button')
-				button.type = 'submit'
-				button.className = 'col-3 btn btn-info'
-				button.innerHTML = 'Atualizar'
-
-				//cria arvore de elementos
-				form.appendChild(inputTarefa)
-				form.appendChild(button)
-
-				//Insere a arvore no elemento
-				Let tarefa = document.getElementById('tarefa_1')
-				tarefa.innerHTML = ''
-				tarefa.insertBefore(form,tarefa[0])
-
-				alert(txt_tarefa)
-
-
-			}
-
-		</script>
 	</body>
 </html>
