@@ -10,7 +10,9 @@
 	// Apenas para fins de Debug
 	if(defined('DEBUG') && DEBUG == 1){
 		echo '<pre>';
+		echo __FILE__;
 		print_r($_POST);
+		print_r($_GET);
 		echo '</pre>';
 	}
 
@@ -47,6 +49,16 @@
 		if($tarefaService->atualizar()){
 			header('Location: todas_tarefas.php?acao=recuperar');
 		}
+	}
+
+	if(isset($_GET['acao']) && $_GET['acao'] == 'remover'){
+		$tarefa = new Tarefa();
+		$tarefa->__set('id',$_GET['id']);
+		
+		$conexao = new Conexao();
+		$tarefaService = new TarefaService($conexao,$tarefa);
+		$tarefaService->remover();
+		header('Location: todas_tarefas.php?acao=recuperar');
 	}
 
 
