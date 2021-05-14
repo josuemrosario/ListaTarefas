@@ -29,13 +29,21 @@
 		header('Location: nova_tarefa.php?inclusao=1');
 	}
 
-	if(isset($_GET['acao']) && $_GET['acao'] == 'recuperar'){
+	if(isset($_GET['acao']) && $_GET['acao'] == 'recuperartodas'){
 		
 		$tarefa = new Tarefa();
 		$conexao = new Conexao();
 		$tarefaService = new TarefaService($conexao,$tarefa);
 		$tarefas = $tarefaService->recuperar();
 
+
+	}
+
+	if(isset($_GET['acao']) && $_GET['acao'] == 'recuperarpendentes'){
+		$tarefa = new Tarefa();		
+		$conexao = new Conexao();
+		$tarefaService = new TarefaService($conexao,$tarefa);
+		$tarefas = $tarefaService->recuperar_pendentes();
 
 	}
 
@@ -47,7 +55,17 @@
 		$conexao = new Conexao();
 		$tarefaService = new TarefaService($conexao,$tarefa);
 		if($tarefaService->atualizar()){
-			header('Location: todas_tarefas.php?acao=recuperar');
+
+			// volta para pagina de atividades pendentes
+			if(isset($_GET['page']) && $_GET['page'] == 'pendente'){
+				header('Location: todas_tarefas.php?page=pendente&acao=recuperarpendentes');
+			}
+
+			// volta para pagina todas as atividades
+			if(isset($_GET['page']) && $_GET['page'] == 'todas'){
+				header('Location: todas_tarefas.php?page=todas&acao=recuperartodas');
+			}
+
 		}
 	}
 
@@ -58,7 +76,17 @@
 		$conexao = new Conexao();
 		$tarefaService = new TarefaService($conexao,$tarefa);
 		$tarefaService->remover();
-		header('Location: todas_tarefas.php?acao=recuperar');
+
+
+		// volta para pagina de atividades pendentes
+		if(isset($_GET['page']) && $_GET['page'] == 'pendente'){
+			header('Location: todas_tarefas.php?page=pendente&acao=recuperarpendentes');
+		}
+
+		// volta para pagina todas as atividades
+		if(isset($_GET['page']) && $_GET['page'] == 'todas'){
+			header('Location: todas_tarefas.php?page=todas&acao=recuperartodas');
+		}
 	}
 
 	if(isset($_GET['acao']) && $_GET['acao'] == 'marcarrealizada'){
@@ -69,8 +97,21 @@
 		$conexao = new Conexao();
 		$tarefaService = new TarefaService($conexao,$tarefa);
 		$tarefaService->marcarRealizada();
-		header('Location: todas_tarefas.php?acao=recuperar');
+
+
+		// volta para pagina de atividades pendentes
+		if(isset($_GET['page']) && $_GET['page'] == 'pendente'){
+			header('Location: todas_tarefas.php?page=pendente&acao=recuperarpendentes');
+		}
+
+		// volta para pagina todas as atividades
+		if(isset($_GET['page']) && $_GET['page'] == 'todas'){
+			header('Location: todas_tarefas.php?page=todas&acao=recuperartodas');
+		}
 	}
+
+
+
 
 
 

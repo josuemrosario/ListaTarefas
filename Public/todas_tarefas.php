@@ -28,7 +28,12 @@
 				
 				//cria o form
 				let form = document.createElement('Form')
-				form.action = 'tarefa_controller.php?acao=atualizar'
+
+				const queryString = window.location.search
+				const urlParams = new URLSearchParams(queryString)
+				const page_type = urlParams.get('page')
+
+				form.action = 'tarefa_controller.php?acao=atualizar&page=' + page_type
 				form.method = 'post'
 				form.className = 'row'
 
@@ -91,9 +96,21 @@
 			<div class="row">
 				<div class="col-sm-3 menu">
 					<ul class="list-group">
-						<li class="list-group-item"><a href="index.php">Tarefas pendentes</a></li>
-						<li class="list-group-item"><a href="nova_tarefa.php">Nova tarefa</a></li>
-						<li class="list-group-item active"><a href="#">Todas tarefas</a></li>
+						
+						<li class="list-group-item <?= $_GET['page'] == 'pendente' ? "active" :""  ?>" >
+							<a href="todas_tarefas.php?page=pendente&acao=recuperarpendentes">
+								Tarefas pendentes
+							</a>
+						</li>
+
+						<li class="list-group-item" >
+							<a href="nova_tarefa.php">Nova tarefa</a>
+						</li>
+				
+						<li class="list-group-item <?= $_GET['page'] == 'todas' ? "active" :""  ?>" >
+							<a href="todas_tarefas.php?page=todas&acao=recuperartodas">Todas tarefas</a>
+						</li>
+			
 					</ul>
 				</div>
 
@@ -101,7 +118,12 @@
 					<div class="container pagina">
 						<div class="row">
 							<div class="col">
-								<h4>Todas tarefas</h4>
+								<? if(isset($_GET['page']) && $_GET['page'] == 'pendente'){ ?>
+									<h4>Tarefas Pendentes</h4>
+								<? }else{ ?>
+									<h4>Todas Tarefas</h4>
+								<? }?>	
+								
 								<hr />
 
 								<?php foreach ($tarefas as $indice => $tarefa) { ?>								
@@ -130,7 +152,6 @@
 				</div>
 			</div>
 		</div>
-		
 
 	</body>
 </html>
